@@ -7,6 +7,7 @@ You task is to prepare application that will fetch information about launch plat
 API documentation can be found [here](https://docs.spacexdata.com/)
 
 You can use any 3rd party libraries you want. Target SDK 28, min SDK 15.
+Visual design & UX of your choice.
 
 ### Basic version:
 
@@ -14,8 +15,7 @@ You can use any 3rd party libraries you want. Target SDK 28, min SDK 15.
 * Data should be displayed as a list containing information about name, status, and thumbnail photo.
 * Clicking on each element of the list should display details about each platform (name, status, location, detailed description, etc).
 
-### Optional(If you have spare time, its not super important or anything.):
+### Optional: (If you have spare time, its not super important or anything)
 
 * Add possibility to view launch site location on the map, for this use https://developers.google.com/maps/documentation/android-sdk.
 * Add an option to view a list of vehicles launched from a certain location (Including rocket details, you will find information about that in API documentation).
-
