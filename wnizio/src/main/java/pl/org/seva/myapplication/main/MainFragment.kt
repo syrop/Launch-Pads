@@ -17,20 +17,6 @@ class MainFragment : Fragment(R.layout.fr_main) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        GlobalScope.launch {
-            val scope = CoroutineScope(Job() + Dispatchers.Main)
-            scope.launch {
-                withContext(NonCancellable) {
-                    println("wiktor inside the block")
-                    delay(2000)
-                    println("wiktor finished successfully")
-                }
-                yield()
-                println("wiktor not cancelled")
-            }
-            delay(1000)
-            scope.cancel()
-            println("wiktor canceled")
-        }
+
     }
 }
