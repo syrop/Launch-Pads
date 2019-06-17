@@ -6,7 +6,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import pl.org.seva.spacex.R
-import pl.org.seva.spacex.main.api.spaceXService
 import pl.org.seva.spacex.main.extension.invoke
 
 class LaunchPadsFragment : Fragment(R.layout.fr_list) {
