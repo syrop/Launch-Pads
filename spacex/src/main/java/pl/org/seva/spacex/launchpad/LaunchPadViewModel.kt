@@ -2,12 +2,15 @@ package pl.org.seva.spacex.launchpad
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.coroutineScope
 import pl.org.seva.spacex.main.api.spaceXService
 
 class LaunchPadViewModel : ViewModel() {
 
-    val ld = liveData(timeoutInMs = Long.MAX_VALUE) {
+    val ld = liveData(
+        context = viewModelScope.coroutineContext,
+        timeoutInMs = Long.MAX_VALUE) {
         coroutineScope {
             val response = spaceXService.all()
             if (response.isSuccessful) {
