@@ -23,5 +23,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 
-fun <T> LiveData<T>.observe(owner: LifecycleOwner, f: (T) -> Unit) =
-        observe(owner, Observer<T> { f(it) })
+operator fun <T> LiveData<T>.invoke(owner: LifecycleOwner, observer: (T) -> Unit) =
+        observe(owner) { observer(it) }
+
+@Suppress("unused")
+fun <T> LiveData<T>.observe(owner: LifecycleOwner, observer: (T) -> Unit) =
+        observe(owner, Observer<T> { observer(it) })

@@ -17,22 +17,9 @@
  * If you like this program, consider donating bitcoin: bc1qncxh5xs6erq6w4qz3a7xl7f50agrgn3w58dsfp
  */
 
-package pl.org.seva.spacex.launchpad
+package pl.org.seva.spacex.main.extension
 
-import pl.org.seva.spacex.main.api.wikipediaService
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 
-data class LaunchPad(
-    val status: String,
-    val location: Location,
-    val wikipedia: String,
-    val site_id: String) {
-
-    suspend fun getThumbnail(): String {
-        val response = wikipediaService.getSummary(wikipedia.replace(PREFIX, ""))
-        return if (response.isSuccessful) response.body()!!.thumbnail.source else ""
-    }
-
-    companion object {
-        const val PREFIX = "https://en.wikipedia.org/wiki/"
-    }
-}
+operator fun <T> Pair<LiveData<T>, LifecycleOwner>.invoke(observer: (T) -> Unit) = first(second, observer)

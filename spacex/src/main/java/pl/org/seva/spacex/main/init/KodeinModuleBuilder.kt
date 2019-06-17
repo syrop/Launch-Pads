@@ -29,9 +29,7 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.multiton
 import org.kodein.di.generic.singleton
 import pl.org.seva.spacex.BuildConfig
-import pl.org.seva.spacex.main.api.SpaceXService
-import pl.org.seva.spacex.main.api.SpaceXServiceFactory
-import pl.org.seva.spacex.main.api.spaceXServiceFactory
+import pl.org.seva.spacex.main.api.*
 import java.util.logging.Logger
 
 val Context.module get() = KodeinModuleBuilder(this).build()
@@ -56,5 +54,7 @@ class KodeinModuleBuilder(private val ctx: Context) {
         }
         bind<SpaceXServiceFactory>() with singleton { SpaceXServiceFactory() }
         bind<SpaceXService>() with singleton { spaceXServiceFactory.getLaunchPadService() }
+        bind<WikipediaServiceFactory>() with singleton { WikipediaServiceFactory() }
+        bind<WikipediaService>() with singleton { wikipediaServiceFactory.getWikipediaService() }
     }
 }

@@ -2,20 +2,26 @@ package pl.org.seva.spacex.launchpad
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import pl.org.seva.spacex.R
 import pl.org.seva.spacex.main.api.spaceXService
+import pl.org.seva.spacex.main.extension.invoke
 
 class LaunchPadsFragment : Fragment(R.layout.fr_list) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        lifecycleScope.launch {
-            val response = spaceXService.all()
-            println("wiktor response is successful: ${response.isSuccessful}")
-            println("wiktor response: ${response.body()}")
+        (viewModels<LaunchPadViewModel>().value.ld to this) { response ->
+            if (response.isSuccessful) {
+                for (launchPad in response.body()!!) {
+                    lifecycleScope.launch {
+                        println("wiktor ${launchPad.location.name} thumbnail: ${launchPad.getThumbnail()}")
+                    }
+                }
+            }
         }
     }
 }
