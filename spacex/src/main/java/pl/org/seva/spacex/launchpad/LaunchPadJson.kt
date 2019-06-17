@@ -17,16 +17,31 @@
  * If you like this program, consider donating bitcoin: bc1qncxh5xs6erq6w4qz3a7xl7f50agrgn3w58dsfp
  */
 
-package pl.org.seva.spacex.main.api
+package pl.org.seva.spacex.launchpad
 
-import pl.org.seva.spacex.launchpad.LaunchPadJson
-import pl.org.seva.spacex.main.init.instance
-import retrofit2.Response
-import retrofit2.http.GET
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
+import pl.org.seva.spacex.main.api.wikipediaService
 
-val spaceXService by instance<SpaceXService>()
+data class LaunchPadJson(
+    val status: String,
+    val location: Location,
+    val wikipedia: String,
+    val site_id: String) {
 
-interface SpaceXService {
-    @GET("launchpads")
-    suspend fun all(): Response<List<LaunchPadJson>>
+    fun toLaunchPad(scope: CoroutineScope) = LaunchPad(
+        status,
+        location,
+        scope.async { getThumbnail() },
+        site_id
+    )
+
+    private suspend fun getThumbnail(): String {
+        val response = wikipediaService.getSummary(wikipedia.replace(PREFIX, ""))
+        return if (response.isSuccessful) response.body()!!.thumbnail.source else ""
+    }
+
+    companion object {
+        const val PREFIX = "https://en.wikipedia.org/wiki/"
+    }
 }

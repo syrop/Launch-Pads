@@ -14,10 +14,10 @@ class LaunchPadsFragment : Fragment(R.layout.fr_list) {
         super.onActivityCreated(savedInstanceState)
 
         (viewModels<LaunchPadViewModel>().value.ld to this) { response ->
-            if (response.isSuccessful) {
-                for (launchPad in response.body()!!) {
+            if (response is LaunchPadViewModel.Status.Success) {
+                for (launchPad in response.list) {
                     lifecycleScope.launch {
-                        println("wiktor ${launchPad.location.name} thumbnail: ${launchPad.getThumbnail()}")
+                        println("wiktor ${launchPad.location.name} thumbnail: ${launchPad.thumbnail.await()}")
                     }
                 }
             }
