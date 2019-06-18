@@ -17,28 +17,9 @@
  * If you like this program, consider donating bitcoin: bc1qncxh5xs6erq6w4qz3a7xl7f50agrgn3w58dsfp
  */
 
-package pl.org.seva.spacex.main
+package pl.org.seva.spacex.launchpad
 
-import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
-import kotlinx.android.synthetic.main.act_main.*
+import androidx.fragment.app.Fragment
 import pl.org.seva.spacex.R
 
-class MainActivity : AppCompatActivity() {
-
-    private val navController by lazy { findNavController(R.id.nav_host_fragment) }
-
-    @SuppressLint("CheckResult")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.act_main)
-        setSupportActionBar(toolbar)
-        NavigationUI.setupActionBarWithNavController(this, navController)
-    }
-
-    override fun onSupportNavigateUp() = navController.navigateUp()
-}
+class MapFragment : Fragment(R.layout.fr_map)

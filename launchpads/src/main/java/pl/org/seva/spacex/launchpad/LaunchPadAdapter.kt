@@ -30,8 +30,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import pl.org.seva.spacex.R
 import pl.org.seva.spacex.main.extension.inflate
+import pl.org.seva.spacex.main.extension.invoke
 
-class LaunchPadAdapter(private val list: List<LaunchPad>, private val scope: CoroutineScope) :
+class LaunchPadAdapter(
+    private val list: List<LaunchPad>,
+    private val scope: CoroutineScope,
+    private val onClick: (Int) -> Unit) :
     RecyclerView.Adapter<LaunchPadAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -50,7 +54,10 @@ class LaunchPadAdapter(private val list: List<LaunchPad>, private val scope: Cor
         }
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        init { view { onClick(adapterPosition) } }
+
         val thumbnail: ImageView = view.thumbnail
         val name: TextView = view.name
         val status: TextView = view.status

@@ -3,4 +3,7 @@
 
     <!-- Launch pads fragment -->
     <string name="launch_pads_network_error">Network error</string>
+
+    <!-- Map fragment -->
+    <string name="map_label">Map</string>
 </resources>
