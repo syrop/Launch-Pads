@@ -23,6 +23,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -44,3 +45,8 @@ fun Fragment.prefs(name: String): SharedPreferences =
 
 fun Fragment.checkPermission(permission: String) =
     ContextCompat.checkSelfPermission(context!!, permission) == PackageManager.PERMISSION_GRANTED
+
+var Fragment.title: CharSequence get() = (requireActivity() as AppCompatActivity).supportActionBar!!.title!!
+    set(value) {
+        (requireActivity() as AppCompatActivity).supportActionBar!!.title = value
+    }

@@ -27,6 +27,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import pl.org.seva.launchpads.R
 import pl.org.seva.launchpads.main.extension.invoke
 import pl.org.seva.launchpads.main.extension.prefs
+import pl.org.seva.launchpads.main.extension.title
 import pl.org.seva.launchpads.main.ui.createMapHolder
 import pl.org.seva.launchpads.main.ui.enableMyLocationOnResume
 
@@ -37,6 +38,7 @@ class MapFragment : Fragment(R.layout.fr_map) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        title = single.launchPad.location.name
         @Suppress("ReplaceSingleLineLet")
         createMapHolder(R.id.map) {
             prefs = prefs(SHARED_PREFERENCES_TAG)
