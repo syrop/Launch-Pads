@@ -22,6 +22,7 @@ package pl.org.seva.spacex.launchpad
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fr_launch_pads.*
@@ -43,7 +44,7 @@ class LaunchPadsFragment : Fragment(R.layout.fr_launch_pads) {
                 progress.visibility = View.GONE
                 recycler.visibility = View.VISIBLE
                 recycler.verticalDivider()
-                recycler.adapter = LaunchPadAdapter(response.list)
+                recycler.adapter = LaunchPadAdapter(response.list, lifecycleScope)
                 recycler.layoutManager = LinearLayoutManager(context)
             }
             else {

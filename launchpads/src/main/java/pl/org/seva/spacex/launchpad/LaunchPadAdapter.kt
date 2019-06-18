@@ -24,11 +24,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_launchpad.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import pl.org.seva.spacex.R
 import pl.org.seva.spacex.main.extension.inflate
 
-class LaunchPadAdapter(private val list: List<LaunchPad>) : RecyclerView.Adapter<LaunchPadAdapter.ViewHolder>() {
+class LaunchPadAdapter(private val list: List<LaunchPad>, private val scope: CoroutineScope) :
+    RecyclerView.Adapter<LaunchPadAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(parent.inflate(R.layout.row_launchpad))
@@ -39,6 +43,11 @@ class LaunchPadAdapter(private val list: List<LaunchPad>) : RecyclerView.Adapter
         val lp = list[position]
         holder.name.text = lp.location.name
         holder.status.text = lp.status
+        scope.launch {
+            Picasso.get()
+                .load(lp.thumbnail.await())
+                .into(holder.thumbnail)
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
