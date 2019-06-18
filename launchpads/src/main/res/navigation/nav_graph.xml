@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="pl.org.seva.spacex.launchpad.LaunchPadsFragment"
+        android:name="pl.org.seva.launchpads.launchpad.LaunchPadsFragment"
         tools:layout="@layout/fr_launch_pads"
         android:label="@string/app_name">
         <action android:id="@+id/action_mainFragment_to_mapFragment" app:destination="@id/mapFragment"/>
@@ -15,7 +15,7 @@
 
     <fragment
             android:id="@+id/mapFragment"
-            android:name="pl.org.seva.spacex.launchpad.MapFragment"
+            android:name="pl.org.seva.launchpads.launchpad.MapFragment"
             android:label="@string/map_label"
             tools:layout="@layout/fr_map"/>
 
