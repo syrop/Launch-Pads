@@ -26,12 +26,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fr_launch_pads.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import pl.org.seva.spacex.R
 import pl.org.seva.spacex.main.extension.invoke
 import pl.org.seva.spacex.main.extension.nav
 import pl.org.seva.spacex.main.extension.toast
 import pl.org.seva.spacex.main.extension.verticalDivider
 
+@ExperimentalCoroutinesApi
 class LaunchPadsFragment : Fragment(R.layout.fr_launch_pads) {
 
     private val list by navGraphViewModels<ListVM>(R.id.nav_graph)

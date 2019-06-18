@@ -27,11 +27,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_launchpad.view.*
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import pl.org.seva.spacex.R
 import pl.org.seva.spacex.main.extension.inflate
 import pl.org.seva.spacex.main.extension.invoke
+import java.lang.IllegalStateException
 
+@ExperimentalCoroutinesApi
 class LaunchPadAdapter(
     private val list: List<LaunchPad>,
     private val scope: CoroutineScope,
@@ -47,10 +50,17 @@ class LaunchPadAdapter(
         val lp = list[position]
         holder.name.text = lp.location.name
         holder.status.text = lp.status
-        scope.launch {
+        try {
             Picasso.get()
-                .load(lp.thumbnail.await())
+                .load(lp.thumbnail.getCompleted())
                 .into(holder.thumbnail)
+        }
+        catch (e: IllegalStateException) {
+            scope.launch {
+                Picasso.get()
+                    .load(lp.thumbnail.await())
+                    .into(holder.thumbnail)
+            }
         }
     }
 

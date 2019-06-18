@@ -20,5 +20,7 @@
 package pl.org.seva.spacex.launchpad
 
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 data class LaunchPad(val status: String, val location: Location, val thumbnail: Deferred<String>, val site_id: String)
