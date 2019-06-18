@@ -22,9 +22,11 @@ package pl.org.seva.launchpads.launchpad
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.coroutineScope
 import pl.org.seva.launchpads.main.api.spaceXService
 
+@ExperimentalCoroutinesApi
 class ListVM : ViewModel() {
 
     val ld = liveData(

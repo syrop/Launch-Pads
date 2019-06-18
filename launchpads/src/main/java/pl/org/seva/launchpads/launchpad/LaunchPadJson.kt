@@ -20,9 +20,11 @@
 package pl.org.seva.launchpads.launchpad
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import pl.org.seva.launchpads.main.api.wikipediaService
 
+@ExperimentalCoroutinesApi
 data class LaunchPadJson(
     val status: String,
     val location: Location,
