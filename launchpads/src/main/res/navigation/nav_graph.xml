@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="pl.org.seva.spacex.launchpad.LaunchPadsFragment"
-        tools:layout="@layout/fr_list"
+        tools:layout="@layout/fr_launch_pads"
         android:label="MainFragment">
         <action
             android:id="@+id/action_mainFragment_to_secondFragment"

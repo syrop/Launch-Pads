@@ -30,6 +30,7 @@ import org.kodein.di.generic.multiton
 import org.kodein.di.generic.singleton
 import pl.org.seva.spacex.BuildConfig
 import pl.org.seva.spacex.main.api.*
+import pl.org.seva.spacex.main.ui.Toaster
 import java.util.logging.Logger
 
 val Context.module get() = KodeinModuleBuilder(this).build()
@@ -56,5 +57,6 @@ class KodeinModuleBuilder(private val ctx: Context) {
         bind<SpaceXService>() with singleton { spaceXServiceFactory.getLaunchPadService() }
         bind<WikipediaServiceFactory>() with singleton { WikipediaServiceFactory() }
         bind<WikipediaService>() with singleton { wikipediaServiceFactory.getWikipediaService() }
+        bind<Toaster>() with singleton { Toaster(ctx) }
     }
 }
