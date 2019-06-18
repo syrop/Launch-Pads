@@ -19,7 +19,7 @@
 
 package pl.org.seva.launchpads.main
 
-import androidx.multidex.MultiDexApplication
+import android.app.Application
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -28,7 +28,7 @@ import pl.org.seva.launchpads.main.init.bootstrap
 import pl.org.seva.launchpads.main.init.module
 
 @Suppress("unused")
-class LaunchPadsApplication : MultiDexApplication() {
+class LaunchPadsApplication : Application() {
 
     init {
         Kodein.global.addImport(module)
