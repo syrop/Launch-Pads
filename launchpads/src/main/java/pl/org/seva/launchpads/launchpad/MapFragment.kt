@@ -39,10 +39,9 @@ class MapFragment : Fragment(R.layout.fr_map) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         title = single.launchPad.location.name
-        @Suppress("ReplaceSingleLineLet")
         createMapHolder(R.id.map) {
             prefs = prefs(SHARED_PREFERENCES_TAG)
-        }.let { holder ->
+        }.also { holder ->
             (holder.liveMap to this) { map ->
                 enableMyLocationOnResume(map)
                 val location = single.launchPad.location
