@@ -38,13 +38,13 @@ fun Fragment.back() = findNavController().popBackStack()
 
 inline fun <reified R : ViewModel> Fragment.viewModel() = lazy { getViewModel<R>() }
 
-inline fun <reified R : ViewModel> Fragment.getViewModel() = activity!!.getViewModel<R>()
+inline fun <reified R : ViewModel> Fragment.getViewModel() = requireActivity().getViewModel<R>()
 
 fun Fragment.prefs(name: String): SharedPreferences =
     requireContext().getSharedPreferences(name, Context.MODE_PRIVATE)
 
 fun Fragment.checkPermission(permission: String) =
-    ContextCompat.checkSelfPermission(context!!, permission) == PackageManager.PERMISSION_GRANTED
+    ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED
 
 var Fragment.title: CharSequence get() = (requireActivity() as AppCompatActivity).supportActionBar!!.title!!
     set(value) {
