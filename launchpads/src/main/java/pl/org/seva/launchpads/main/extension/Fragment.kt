@@ -22,23 +22,18 @@ package pl.org.seva.launchpads.main.extension
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.widget.Toast
 import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 
 fun Fragment.nav(@IdRes resId: Int): Boolean {
     findNavController().navigate(resId)
     return true
 }
-
-fun Fragment.back() = findNavController().popBackStack()
-
-inline fun <reified R : ViewModel> Fragment.viewModel() = lazy { getViewModel<R>() }
-
-inline fun <reified R : ViewModel> Fragment.getViewModel() = requireActivity().getViewModel<R>()
 
 fun Fragment.prefs(name: String): SharedPreferences =
     requireContext().getSharedPreferences(name, Context.MODE_PRIVATE)
@@ -50,3 +45,5 @@ var Fragment.title: CharSequence get() = (requireActivity() as AppCompatActivity
     set(value) {
         (requireActivity() as AppCompatActivity).supportActionBar!!.title = value
     }
+
+fun Fragment.toast(@StringRes id: Int) = Toast.makeText(requireContext(), getString(id), Toast.LENGTH_SHORT).show()

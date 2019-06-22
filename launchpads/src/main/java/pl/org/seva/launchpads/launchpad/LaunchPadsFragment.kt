@@ -54,7 +54,7 @@ class LaunchPadsFragment : Fragment(R.layout.fr_launch_pads) {
                 recycler.layoutManager = LinearLayoutManager(context)
             }
             else {
-                getString(R.string.launch_pads_network_error).toast()
+                toast(R.string.launch_pads_network_error)
             }
         }
     }

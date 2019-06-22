@@ -19,7 +19,6 @@
 
 package pl.org.seva.launchpads.main.init
 
-import android.content.Context
 import android.os.Build
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinProperty
@@ -30,18 +29,15 @@ import org.kodein.di.generic.multiton
 import org.kodein.di.generic.singleton
 import pl.org.seva.launchpads.BuildConfig
 import pl.org.seva.launchpads.main.api.*
-import pl.org.seva.launchpads.main.ui.Toaster
 import java.util.logging.Logger
 
-val Context.module get() = KodeinModuleBuilder(this).build()
+val module get() = KodeinModuleBuilder().build()
 
 inline fun <reified T : Any> instance() = Kodein.global.instance<T>()
 
-inline fun <reified A, reified T : Any> instance(arg: A) = Kodein.global.instance<A, T>(arg = arg)
-
 inline val <T> KodeinProperty<T>.value get() = provideDelegate(null, Build::ID).value
 
-class KodeinModuleBuilder(private val ctx: Context) {
+class KodeinModuleBuilder {
 
     fun build() = Kodein.Module("main") {
         bind<Bootstrap>() with singleton { Bootstrap() }
@@ -57,6 +53,5 @@ class KodeinModuleBuilder(private val ctx: Context) {
         bind<SpaceXService>() with singleton { spaceXServiceFactory.getLaunchPadService() }
         bind<WikipediaServiceFactory>() with singleton { WikipediaServiceFactory() }
         bind<WikipediaService>() with singleton { wikipediaServiceFactory.getWikipediaService() }
-        bind<Toaster>() with singleton { Toaster(ctx) }
     }
 }
