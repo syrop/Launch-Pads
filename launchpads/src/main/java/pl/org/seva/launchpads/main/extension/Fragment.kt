@@ -41,9 +41,10 @@ fun Fragment.prefs(name: String): SharedPreferences =
 fun Fragment.checkPermission(permission: String) =
     ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED
 
-var Fragment.title: CharSequence get() = (requireActivity() as AppCompatActivity).supportActionBar!!.title!!
+var Fragment.title: CharSequence
+    get() = checkNotNull(checkNotNull((requireActivity() as AppCompatActivity).supportActionBar).title)
     set(value) {
-        (requireActivity() as AppCompatActivity).supportActionBar!!.title = value
+        checkNotNull((requireActivity() as AppCompatActivity).supportActionBar).title = value
     }
 
 fun Fragment.toast(@StringRes id: Int) = Toast.makeText(requireContext(), getString(id), Toast.LENGTH_SHORT).show()

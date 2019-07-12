@@ -40,7 +40,7 @@ data class LaunchPadJson(
 
     private suspend fun getThumbnail(): String {
         val response = wikipediaService.getSummary(wikipedia.replace(PREFIX, ""))
-        return if (response.isSuccessful) response.body()!!.thumbnail.source else ""
+        return if (response.isSuccessful) checkNotNull(response.body()).thumbnail.source else ""
     }
 
     companion object {

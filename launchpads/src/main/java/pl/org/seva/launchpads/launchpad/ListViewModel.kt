@@ -27,7 +27,7 @@ import kotlinx.coroutines.coroutineScope
 import pl.org.seva.launchpads.main.api.spaceXService
 
 @ExperimentalCoroutinesApi
-class ListVM : ViewModel() {
+class ListViewModel : ViewModel() {
 
     val ld = liveData(
         context = viewModelScope.coroutineContext,
@@ -35,7 +35,7 @@ class ListVM : ViewModel() {
         coroutineScope {
             val response = spaceXService.all()
             if (response.isSuccessful) {
-                emit(Status.Success(response.body()!!.map { it.toLaunchPad(this) }))
+                emit(Status.Success(checkNotNull(response.body()).map { it.toLaunchPad(this) }))
             }
             else {
                 emit(Status.Error)

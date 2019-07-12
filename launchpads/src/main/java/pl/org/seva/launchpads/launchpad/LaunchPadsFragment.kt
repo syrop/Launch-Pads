@@ -36,14 +36,14 @@ import pl.org.seva.launchpads.main.extension.verticalDivider
 @ExperimentalCoroutinesApi
 class LaunchPadsFragment : Fragment(R.layout.fr_launch_pads) {
 
-    private val list by navGraphViewModels<ListVM>(R.id.nav_graph)
+    private val list by navGraphViewModels<ListViewModel>(R.id.nav_graph)
     private val single by navGraphViewModels<SingleVM>(R.id.nav_graph)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         (list.ld to this) { response ->
-            if (response is ListVM.Status.Success) {
+            if (response is ListViewModel.Status.Success) {
                 progress.visibility = View.GONE
                 recycler.visibility = View.VISIBLE
                 recycler.verticalDivider()

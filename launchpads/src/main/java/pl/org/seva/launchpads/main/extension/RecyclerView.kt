@@ -23,5 +23,5 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 
 fun RecyclerView.verticalDivider() {
-    addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
+    addItemDecoration(DividerItemDecoration(checkNotNull(context), DividerItemDecoration.VERTICAL))
 }
