@@ -47,18 +47,18 @@ class LaunchPadAdapter(
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val lp = list[position]
-        holder.name.text = lp.location.name
-        holder.status.text = lp.status
+        val launchPad = list[position]
+        holder.name.text = launchPad.location.name
+        holder.status.text = launchPad.status
         try {
             Picasso.get()
-                .load(lp.thumbnail.getCompleted())
+                .load(launchPad.thumbnail.getCompleted())
                 .into(holder.thumbnail)
         }
         catch (e: IllegalStateException) {
             scope.launch {
                 Picasso.get()
-                    .load(lp.thumbnail.await())
+                    .load(launchPad.thumbnail.await())
                     .into(holder.thumbnail)
             }
         }

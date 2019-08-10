@@ -42,7 +42,7 @@ class LaunchPadsFragment : Fragment(R.layout.fr_launch_pads) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (list.ld to this) { response ->
+        (list.liveData to this) { response ->
             if (response is ListViewModel.Status.Success) {
                 progress.visibility = View.GONE
                 recycler.visibility = View.VISIBLE
