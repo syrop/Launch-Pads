@@ -29,8 +29,6 @@ import pl.org.seva.launchpads.launchpad.LaunchPadListVM
 import pl.org.seva.launchpads.main.api.*
 import java.util.logging.Logger
 
-val module get() = KodeinModuleBuilder().build()
-
 inline fun <reified T : Any> instance() = Kodein.global.instance<T>()
 
 inline val <T> KodeinProperty<T>.value get() = provideDelegate(null, Build::ID).value

@@ -24,14 +24,14 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.conf.global
+import pl.org.seva.launchpads.main.init.KodeinModuleBuilder
 import pl.org.seva.launchpads.main.init.bootstrap
-import pl.org.seva.launchpads.main.init.module
 
 @Suppress("unused")
 class LaunchPadsApplication : Application() {
 
     init {
-        Kodein.global.addImport(module)
+        Kodein.global.addImport(KodeinModuleBuilder().build())
     }
 
     override fun onCreate() {
