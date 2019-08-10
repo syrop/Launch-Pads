@@ -19,29 +19,30 @@
 
 package pl.org.seva.launchpads.launchpad
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.async
-import pl.org.seva.launchpads.main.api.wikipediaService
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.coroutineScope
+import pl.org.seva.launchpads.main.api.SpaceXService
 
-data class LaunchPadJson(
-    val status: String,
-    val location: Location,
-    val wikipedia: String,
-    val site_id: String) {
+class LaunchPadListVM(private val spaceXService: SpaceXService) : ViewModel() {
 
-    fun toLaunchPad(scope: CoroutineScope) = LaunchPad(
-        status,
-        location,
-        scope.async { getThumbnail() },
-        site_id
-    )
-
-    private suspend fun getThumbnail(): String {
-        val response = wikipediaService.getSummary(wikipedia.replace(PREFIX, ""))
-        return if (response.isSuccessful) checkNotNull(response.body()).thumbnail.source else ""
+    val liveData = liveData(
+        context = viewModelScope.coroutineContext,
+        timeoutInMs = Long.MAX_VALUE) {
+        coroutineScope {
+            val response = spaceXService.getAll()
+            if (response.isSuccessful) {
+                emit(Status.Success(checkNotNull(response.body()).map { it.toLaunchPad(this) }))
+            }
+            else {
+                emit(Status.Error)
+            }
+        }
     }
 
-    companion object {
-        const val PREFIX = "https://en.wikipedia.org/wiki/"
+    sealed class Status {
+        object Error : Status()
+        data class Success(val list: List<LaunchPad>) : Status()
     }
 }

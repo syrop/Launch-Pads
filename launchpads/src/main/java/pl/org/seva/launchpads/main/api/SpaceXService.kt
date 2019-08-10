@@ -19,13 +19,11 @@
 
 package pl.org.seva.launchpads.main.api
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import pl.org.seva.launchpads.launchpad.LaunchPadJson
 import retrofit2.Response
 import retrofit2.http.GET
 
 interface SpaceXService {
-    @ExperimentalCoroutinesApi
     @GET("launchpads")
     suspend fun getAll(): Response<List<LaunchPadJson>>
 }

@@ -32,23 +32,25 @@ import pl.org.seva.launchpads.main.extension.invoke
 import pl.org.seva.launchpads.main.extension.nav
 import pl.org.seva.launchpads.main.extension.toast
 import pl.org.seva.launchpads.main.extension.verticalDivider
+import pl.org.seva.launchpads.main.init.KodeinVMFactory
 
 @ExperimentalCoroutinesApi
 class LaunchPadsFragment : Fragment(R.layout.fr_launch_pads) {
 
-    private val list by navGraphViewModels<ListViewModel>(R.id.nav_graph)
-    private val single by navGraphViewModels<SingleVM>(R.id.nav_graph)
+    private val listVM
+            by navGraphViewModels<LaunchPadListVM>(R.id.nav_graph) { KodeinVMFactory }
+    private val launchPadVM by navGraphViewModels<LaunchPadVM>(R.id.nav_graph)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (list.liveData to this) { response ->
-            if (response is ListViewModel.Status.Success) {
+        (listVM.liveData to this) { response ->
+            if (response is LaunchPadListVM.Status.Success) {
                 progress.visibility = View.GONE
                 recycler.visibility = View.VISIBLE
                 recycler.verticalDivider()
                 recycler.adapter = LaunchPadAdapter(response.list, lifecycleScope) { position ->
-                    single.launchPad = response.list[position]
+                    launchPadVM.launchPad = response.list[position]
                     nav(R.id.action_mainFragment_to_mapFragment)
                 }
                 recycler.layoutManager = LinearLayoutManager(context)

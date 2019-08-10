@@ -20,34 +20,9 @@
 package pl.org.seva.launchpads.launchpad
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.coroutineScope
-import pl.org.seva.launchpads.main.api.SpaceXService
-import pl.org.seva.launchpads.main.init.instance
 
-@ExperimentalCoroutinesApi
-class ListViewModel : ViewModel() {
-
-    private val spaceXService by instance<SpaceXService>()
-
-    val liveData = liveData(
-        context = viewModelScope.coroutineContext,
-        timeoutInMs = Long.MAX_VALUE) {
-        coroutineScope {
-            val response = spaceXService.getAll()
-            if (response.isSuccessful) {
-                emit(Status.Success(checkNotNull(response.body()).map { it.toLaunchPad(this) }))
-            }
-            else {
-                emit(Status.Error)
-            }
-        }
-    }
-
-    sealed class Status {
-        object Error : Status()
-        data class Success(val list: List<LaunchPad>) : Status()
-    }
+class LaunchPadVM : ViewModel() {
+    @ExperimentalCoroutinesApi
+    lateinit var launchPad: LaunchPad
 }

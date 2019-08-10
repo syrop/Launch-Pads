@@ -34,7 +34,7 @@ import pl.org.seva.launchpads.main.ui.enableMyLocationOnResume
 @ExperimentalCoroutinesApi
 class MapFragment : Fragment(R.layout.fr_map) {
 
-    private val single by navGraphViewModels<SingleVM>(R.id.nav_graph)
+    private val single by navGraphViewModels<LaunchPadVM>(R.id.nav_graph)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

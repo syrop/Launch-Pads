@@ -23,11 +23,9 @@ import android.os.Build
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinProperty
 import org.kodein.di.conf.global
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.multiton
-import org.kodein.di.generic.singleton
+import org.kodein.di.generic.*
 import pl.org.seva.launchpads.BuildConfig
+import pl.org.seva.launchpads.launchpad.LaunchPadListVM
 import pl.org.seva.launchpads.main.api.*
 import java.util.logging.Logger
 
@@ -53,5 +51,6 @@ class KodeinModuleBuilder {
         bind<SpaceXService>() with singleton { spaceXServiceFactory.getLaunchPadService() }
         bind<WikipediaServiceFactory>() with singleton { WikipediaServiceFactory() }
         bind<WikipediaService>() with singleton { wikipediaServiceFactory.getWikipediaService() }
+        bind<LaunchPadListVM>() with provider { LaunchPadListVM(instance()) }
     }
 }

@@ -17,10 +17,16 @@
  * If you like this program, consider donating bitcoin: bc1qncxh5xs6erq6w4qz3a7xl7f50agrgn3w58dsfp
  */
 
-package pl.org.seva.launchpads.launchpad
+package pl.org.seva.launchpads.main.init
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import org.kodein.di.Kodein
+import org.kodein.di.TT
+import org.kodein.di.conf.global
+import org.kodein.di.direct
 
-class SingleVM : ViewModel() {
-    lateinit var launchPad: LaunchPad
+object KodeinVMFactory : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T =
+            Kodein.global.direct.Instance(TT(modelClass))
 }
