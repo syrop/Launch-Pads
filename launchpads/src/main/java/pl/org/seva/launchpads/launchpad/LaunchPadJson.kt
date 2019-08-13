@@ -21,13 +21,16 @@ package pl.org.seva.launchpads.launchpad
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
-import pl.org.seva.launchpads.main.api.wikipediaService
+import pl.org.seva.launchpads.main.api.WikipediaService
+import pl.org.seva.launchpads.main.init.instance
 
 data class LaunchPadJson(
     val status: String,
     val location: Location,
     val wikipedia: String,
     val site_id: String) {
+
+    private val wikipediaService by instance<WikipediaService>()
 
     fun toLaunchPad(scope: CoroutineScope) = LaunchPad(
         status,
