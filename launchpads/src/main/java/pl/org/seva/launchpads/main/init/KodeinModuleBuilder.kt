@@ -35,6 +35,8 @@ inline val <T> KodeinProperty<T>.value get() = provideDelegate(null, Build::ID).
 
 class KodeinModuleBuilder {
 
+    private val wikipediaServiceFactory by instance<WikipediaServiceFactory>()
+
     fun build() = Kodein.Module("main") {
         bind<Bootstrap>() with singleton { Bootstrap() }
         bind<Logger>() with multiton { tag: String ->

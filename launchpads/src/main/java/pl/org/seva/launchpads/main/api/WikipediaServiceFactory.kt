@@ -19,12 +19,9 @@
 
 package pl.org.seva.launchpads.main.api
 
-import pl.org.seva.launchpads.main.init.instance
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-
-val wikipediaServiceFactory by instance<WikipediaServiceFactory>()
 
 class WikipediaServiceFactory {
 
