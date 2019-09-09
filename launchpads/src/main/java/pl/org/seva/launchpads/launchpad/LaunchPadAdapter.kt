@@ -36,9 +36,9 @@ import java.lang.IllegalStateException
 
 @ExperimentalCoroutinesApi
 class LaunchPadAdapter(
-    private val list: List<LaunchPad>,
-    private val scope: CoroutineScope,
-    private val onClick: (Int) -> Unit) :
+        private val list: List<LaunchPad>,
+        private val scope: CoroutineScope,
+        private val onClick: (Int) -> Unit) :
     RecyclerView.Adapter<LaunchPadAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
